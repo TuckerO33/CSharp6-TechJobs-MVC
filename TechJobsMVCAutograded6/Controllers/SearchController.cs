@@ -11,6 +11,7 @@ namespace TechJobsMVCAutograded6.Controllers;
 public class SearchController : Controller
 {
     // GET: /<controller>/
+    
     public IActionResult Index()
     {
         ViewBag.columns = ListController.ColumnChoices;
@@ -21,7 +22,7 @@ public class SearchController : Controller
     public IActionResult Results(string searchType, string searchTerm)
     {
         List<Job> jobs = [];
-        if (searchTerm == "all" || searchTerm == "")
+        if (searchTerm == "all" || searchTerm == "" || searchTerm is null)
         {
             jobs = JobData.FindAll();
         }
@@ -31,7 +32,7 @@ public class SearchController : Controller
         }
         ViewBag.jobs = jobs;
         ViewBag.columns = ListController.ColumnChoices;
-        return View();
+        return View("Index");
     }
 }
 
